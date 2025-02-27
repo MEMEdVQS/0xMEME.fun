@@ -15,7 +15,8 @@
     </style>
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, clipboard-write=(self)"
+      http-equiv="Permissions-Policy"
     />
   </head>
   <body>
@@ -30,6 +31,7 @@
       iframeNode.src = link.toString();
       iframeNode.width = '100%';
       iframeNode.height = '100%';
+      iframeNode.allow = 'clipboard-write';
       document.body.appendChild(iframeNode);
     </script>
   </body>
