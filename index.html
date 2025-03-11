@@ -43,5 +43,10 @@
       iframeNode.allow = 'clipboard-write';
       document.body.appendChild(iframeNode);
     </script>
+    <script>
+       window.addEventListener('message', function(event) {
+         gtag(...event.data);
+       });
+    </script>
   </body>
 </html>
