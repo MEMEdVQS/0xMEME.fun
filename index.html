@@ -1,14 +1,16 @@
 <html>
   <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LYTKPNFK2J"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  
-    gtag('config', 'G-LYTKPNFK2J');
-  </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LYTKPNFK2J"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-LYTKPNFK2J');
+    </script>
     <title>0xMEME</title>
     <style>
       html,
@@ -27,13 +29,28 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, clipboard-write=(self)"
       http-equiv="Permissions-Policy"
     />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   </head>
   <body>
     <script>
+      const params = ['invite_code', 'page', 'page_params'];
+      window.addEventListener('message', function (event) {
+        if (event.data.type === 'CHANGE_LOCATION') {
+          const url = event.data.payload;
+          const currentUrl = new URL(window.location.href);
+          for (const key of params) {
+            const value = url.searchParams.get(key);
+            if (value) {
+              currentUrl.searchParams.set(key, value);
+            }
+          }
+          window.history.pushState({}, '', currentUrl.toString());
+          return;
+        }
+        gtag(...event.data);
+      });
       const link = new URL('https://y.ntnl.io?from_npm=1&scope=memedvqs&name=meme-ui');
       const url = new URL(window.location.href);
-      const params = ['invite_code', 'page', 'page_params'];
       for (const key of params) {
         const value = url.searchParams.get(key);
         if (value) {
@@ -46,15 +63,6 @@
       iframeNode.height = '100%';
       iframeNode.allow = 'clipboard-write';
       document.body.appendChild(iframeNode);
-    </script>
-    <script>
-       window.addEventListener('message', function(event) {
-         if (event.data.type === 'CHANGE_LOCATION') {
-           window.history.pushState({}, '', event.data.payload);
-           return;
-         }
-         gtag(...event.data);
-       });
     </script>
   </body>
 </html>
