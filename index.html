@@ -36,7 +36,7 @@
       const params = ['invite_code', 'page', 'page_params'];
       window.addEventListener('message', function (event) {
         if (event.data.type === 'CHANGE_LOCATION') {
-          const url = event.data.payload;
+          const url = new URL(event.data.payload);
           const currentUrl = new URL(window.location.href);
           for (const key of params) {
             const value = url.searchParams.get(key);
