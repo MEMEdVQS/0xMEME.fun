@@ -33,9 +33,12 @@
     <script>
       const link = new URL('https://y.ntnl.io?from_npm=1&scope=memedvqs&name=meme-ui');
       const url = new URL(window.location.href);
-      const code = url.searchParams.get('invite_code');
-      if (code) {
-        link.searchParams.set('invite_code', code);
+      const params = ['invite_code', 'page', 'page_params'];
+      for (const key of params) {
+        const value = url.searchParams.get(key);
+        if (value) {
+          link.searchParams.set(key, value);
+        }
       }
       const iframeNode = document.createElement('iframe');
       iframeNode.src = link.toString();
@@ -46,6 +49,10 @@
     </script>
     <script>
        window.addEventListener('message', function(event) {
+         if (event.data.type === 'CHANGE_LOCATION') {
+           window.history.pushState({}, '', event.data.payload);
+           return;
+         }
          gtag(...event.data);
        });
     </script>
