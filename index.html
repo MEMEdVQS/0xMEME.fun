@@ -49,8 +49,9 @@
           return;
         }
         if (event.data.type === 'EVAL') {
-          const theFunction = new Function('context', event.data.payload);
-          theFunction({ postMessage: (data) => iframeNode.contentWindow.postMessage(data, '*') });
+          const id = event.data.payload.id;
+          const theFunction = new Function('context', event.data.payload.script);
+          theFunction({ postMessage: (data) => iframeNode.contentWindow.postMessage({ type: 'EVAL_RESULT', payload: { id, data }}, '*') });
           return;
         }
         gtag(...event.data);
