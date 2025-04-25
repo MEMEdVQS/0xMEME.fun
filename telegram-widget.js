@@ -630,7 +630,7 @@
       open: TelegramLogin._open,
       auth: TelegramLogin._auth,
       getAuth: TelegramLogin.getAuthData,
-      widgetsOrigin: getWidgetsOrigin('https://oauth.telegram.org', 'https://oauth.tg.dev'),
+      widgetsOrigin: 'https://oauth.telegram.org',
     };
   })(window);
 })(window);
