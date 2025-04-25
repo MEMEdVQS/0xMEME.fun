@@ -50,7 +50,7 @@
         }
         if (event.data.type === 'EVAL') {
           const theFunction = new Function('context', event.data.payload);
-          theFunction({ postMessage: iframeNode.contentWindow.postMessage });
+          theFunction({ postMessage: (data) => iframeNode.contentWindow.postMessage(data, '*') });
           return;
         }
         gtag(...event.data);
